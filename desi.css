@@ -1,0 +1,56 @@
+.container{
+    margin : 0 auto;
+    text-align : center;
+    background-color : #D3D3D3
+
+
+}
+.container h2{
+    font : 20px, sans-serif;
+    padding : 5px;
+}
+
+.container h3{
+    font : 30px, robot;
+
+}
+
+.results, .game-btn{
+    background : url("https://wallpaperaccess.com/full/845581.jpg") right;
+}
+
+.results{
+    padding : 10px;
+    display : flex;
+    flex-wrap : wrap;
+    flex-direction : row;
+    justify-content : space-around;
+    border : 1px solid black;
+    color : blue;
+
+}
+
+.results div{
+    flex : 1;
+    border : 2px solid black;
+}
+
+.your-score, .dealer-score{
+    padding : 10px;
+    height : 630px;
+ }
+
+.score-card tr, th, td{
+    border : 1px solid black;
+}
+
+table{
+    margin : 20px auto;
+    margin-left: auto;
+    margin-right: auto;
+    border : 1px solid black;
+}
+
+img{
+    margin : 20px
+}
