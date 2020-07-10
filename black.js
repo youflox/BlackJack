@@ -26,7 +26,9 @@ let soundaww = new Audio('sounds/aww.mp3')
 let soundstap = new Audio('sounds/stap.mp3')
 
 function selectCard(){
+
     sound.play()
+    document.getElementById('stand-btn').disabled = false;
     genNum = randomNumGen()
     let cardImage = document.createElement('img');
     cardImage.src = `images/${genNum}.png` ;
@@ -40,6 +42,11 @@ function selectCard(){
     updateScore(genNum)
 
     checkIf21(newScore)
+
+    console.log(newScore)
+
+
+
 
 }
 
@@ -102,42 +109,56 @@ function clickedDeal(){
     newScore = 0
     document.querySelector("#you-score-board").textContent = newScore;
     currentPlayer = 'you'
-
-    winner(finalScore)
-
-
 }
 
-function clickStand(){
+async function clickStand(){
+
+    document.getElementById('hit-btn').disabled = true;
+    document.getElementById('stand-btn').disabled = true;
+
     currentPlayer = 'dealer'
     if(newScore>21){
         finalScore['you']= 0}
     else{
-    finalScore['you'] = newScore}
+        finalScore['you'] = newScore
+    }
 
     newScore = 0
     document.getElementById('hit-btn').disabled = false;
 
-
+    while (newScore<16){
+        selectCard()
+        await sleep(1000)
+    }
+    winner(finalScore)
 }
+
 
 //finalScore['you']
 //finalScore['dealer]
 function winner(finalScore){
         if(finalScore['you']>finalScore['dealer']){
-            alert('you Win!!')
             result['win'] +=1
             document.querySelector('#wins').textContent = result['win']
+            document.querySelector('#play-tag').textContent = 'You Win!!'
+            document.querySelector('#play-tag').style.color = 'green'
             }
         else if(finalScore['you']<finalScore['dealer']){
-            alert('you Loose.')
             result['loose'] +=1
             document.querySelector('#looses').textContent = result['loose']
+            document.querySelector('#play-tag').textContent = 'You Loose!!'
+            document.querySelector('#play-tag').style.color = 'red'
             }
         else{
-            alert("Draw!")
             result['draw'] +=1
             document.querySelector('#draws').textContent = result['draw']
+            document.querySelector('#play-tag').textContent = 'Draw!!'
+            document.querySelector('#play-tag').style.color = 'red'
             }
 
 }
+
+function sleep(ms){
+    return new Promise(resolve=> {setTimeout(resolve, ms)});
+}
+
